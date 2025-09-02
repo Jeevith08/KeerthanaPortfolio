@@ -1,0 +1,55 @@
+/* Feminine animated scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #f9a8d4 #fff;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  background: #fff;
+}
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(120deg, #f9a8d4 40%, #c084fc 100%);
+  border-radius: 8px;
+  box-shadow: 0 0 8px 2px #f9a8d4cc;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(120deg, #f472b6 40%, #a78bfa 100%);
+  box-shadow: 0 0 16px 4px #f472b6cc;
+}
+*::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    scrollbar-color: #f472b6 #18181b;
+  }
+  *::-webkit-scrollbar {
+    background: #18181b;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(120deg, #f472b6 40%, #a78bfa 100%);
+    box-shadow: 0 0 8px 2px #a78bfa99;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(120deg, #f9a8d4 40%, #c084fc 100%);
+    box-shadow: 0 0 16px 4px #f9a8d4cc;
+  }
+  *::-webkit-scrollbar-track {
+    background: #18181b;
+  }
+}
+
+@media (max-width: 1024px) {
+  html, body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    position: static !important;
+    height: auto !important;
+    touch-action: auto !important;
+    overscroll-behavior: auto !important;
+  }
+} 
