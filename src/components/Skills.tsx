@@ -24,9 +24,9 @@ const Skills = () => {
   // Skill data
   const skills = [
     { name: 'Java', level: 80 },
-    { name: 'Web Dev', level: 85 },
-    { name: 'C++', level: 75 },
-    { name: 'Logical', level: 90 },
+    { name: 'Web Dev', level: 95 },
+    { name: 'Python', level: 75 },
+    { name: 'Logical', level: 99 },
   ];
 
   // Chart dimensions
