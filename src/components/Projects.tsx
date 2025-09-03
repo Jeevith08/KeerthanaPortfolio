@@ -10,7 +10,7 @@ const Projects = () => {
     {
       title: 'Stock Trend Predictor',
       description: 'Collected and preprocessed historical stock market data.',
-      image: '/icons/stock-trend.svg',
+      image: `${import.meta.env.BASE_URL}icons/stock-trend.svg`,
       tags: ['ML', 'Data'],
       liveLink: '#',
       githubLink: '#',
@@ -19,7 +19,7 @@ const Projects = () => {
     {
       title: 'Library management system in Java',
       description: 'Prepared technical documentation for maintenance and user training.',
-      image: '/icons/library.svg',
+      image: `${import.meta.env.BASE_URL}icons/library.svg`,
       tags: ['Java'],
       liveLink: '#',
       githubLink: '#',
@@ -28,7 +28,7 @@ const Projects = () => {
     {
       title: 'IOT based theft and motion detection',
       description: 'Integrated wireless communication for alerts; built and tested a prototype.',
-      image: '/icons/iot-motion.svg',
+      image: `${import.meta.env.BASE_URL}icons/iot-motion.svg`,
       tags: ['IoT'],
       liveLink: '#',
       githubLink: '#',
@@ -37,7 +37,7 @@ const Projects = () => {
     {
       title: 'IOT based under ground cable fault detector',
       description: 'Utilized IoT sensors for real‑time underground cable fault detection.',
-      image: '/icons/iot-cable.svg',
+      image: `${import.meta.env.BASE_URL}icons/iot-cable.svg`,
       tags: ['IoT'],
       liveLink: '#',
       githubLink: '#',

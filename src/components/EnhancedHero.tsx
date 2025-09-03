@@ -308,7 +308,7 @@ const EnhancedHero = () => {
                 isDark ? 'border-rose-400/20' : 'border-rose-200/50'
               } backdrop-blur-sm`}>
                 <img 
-                  src="/IMG_20250902_220617.jpg"
+                  src={`${import.meta.env.BASE_URL}IMG_20250902_220617.jpg`}
                   alt="Keerthana"
                   className="w-full h-full object-cover"
                   loading="lazy"
