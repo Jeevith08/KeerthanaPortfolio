@@ -217,7 +217,7 @@ const Hero = () => {
             <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur opacity-30"></div>
             <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 backdrop-blur-sm">
               <img 
-                src="/image.png"
+                src="/IMG_20250902_220617.jpg"
                 alt="Chibi Girl Waving"
                 className="w-full h-full object-cover"
               />
