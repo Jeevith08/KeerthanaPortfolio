@@ -1,14 +1,21 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, MapPin, Phone, Send, X } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, X, Linkedin, Instagram, Github } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 const Contact = () => {
   const [isCalling, setIsCalling] = useState(false);
+  const [showActions, setShowActions] = useState(false);
   const { isDark } = useTheme();
 
+  const PHONE_NUMBER = '+91 9345966973';
+  const EMAIL = 'keerthanasubbu5@gmail.com';
+  const LINKEDIN_URL = 'https://www.linkedin.com/in/keerthana-s004?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app';
+  const INSTAGRAM_URL = 'https://www.instagram.com/_k.eerthuu._?igsh=MWZ6NHFkc204bDRvOQ==';
+  const GITHUB_URL = 'https://github.com/';
+
   const handleCallClick = () => {
-    setIsCalling(true);
+    setShowActions((prev) => !prev);
   };
 
   const handleCloseForm = () => {
@@ -110,42 +117,72 @@ const Contact = () => {
           <p className="text-sm text-gray-400">Feel free to get in touch. Open to projects and ideas.</p>
         </motion.div>
 
-        <div className="flex justify-center items-center min-h-[400px]">
-          <AnimatePresence mode="wait">
-            {!isCalling ? (
+        <div className="flex flex-col items-center justify-center min-h-[400px]">
+          <AnimatePresence>
+            <motion.div
+              key="call-icon"
+              className="relative cursor-pointer"
+              onClick={handleCallClick}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ duration: 0.3 }}
+            >
               <motion.div
-                key="call-icon"
-                className="relative cursor-pointer"
-                onClick={handleCallClick}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                transition={{ duration: 0.3 }}
+                className="absolute inset-0 rounded-full bg-white/40 backdrop-blur-md shadow-lg border border-pink-100/60"
+                variants={ringVariants}
+                initial="initial"
+                animate="animate"
+              />
+              <motion.div
+                className={`relative p-6 rounded-full bg-white/60 backdrop-blur-lg shadow-md border border-pink-100/70 flex flex-col items-center justify-center`}
+                variants={callIconVariants}
+                whileHover="hover"
               >
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-white/40 backdrop-blur-md shadow-lg border border-pink-100/60"
-                  variants={ringVariants}
-                  initial="initial"
-                  animate="animate"
-                />
-                <motion.div
-                  className={`relative p-6 rounded-full bg-white/60 backdrop-blur-lg shadow-md border border-pink-100/70 flex flex-col items-center justify-center`}
-                  variants={callIconVariants}
-                  whileHover="hover"
-                >
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="12" fill="url(#pinkGradient)" fillOpacity="0.12" />
-                    <defs>
-                      <linearGradient id="pinkGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#f472b6" />
-                        <stop offset="1" stopColor="#c084fc" />
-                      </linearGradient>
-                    </defs>
-                    <path d="M17.707 15.293l-2.387-2.387a1 1 0 0 0-1.414 0l-.793.793a8.014 8.014 0 0 1-3.293-3.293l.793-.793a1 1 0 0 0 0-1.414l-2.387-2.387a1 1 0 0 0-1.414 0l-.793.793c-.39.39-.586.902-.586 1.414 0 5.523 4.477 10 10 10 .512 0 1.024-.196 1.414-.586l.793-.793a1 1 0 0 0 0-1.414z" fill="url(#pinkGradient)"/>
-                  </svg>
-                </motion.div>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="12" fill="url(#pinkGradient)" fillOpacity="0.12" />
+                  <defs>
+                    <linearGradient id="pinkGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#f472b6" />
+                      <stop offset="1" stopColor="#c084fc" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M17.707 15.293l-2.387-2.387a1 1 0 0 0-1.414 0l-.793.793a8.014 8.014 0 0 1-3.293-3.293l.793-.793a1 1 0 0 0 0-1.414l-2.387-2.387a1 1 0 0 0-1.414 0l-.793.793c-.39.39-.586.902-.586 1.414 0 5.523 4.477 10 10 10 .512 0 1.024-.196 1.414-.586l.793-.793a1 1 0 0 0 0-1.414z" fill="url(#pinkGradient)"/>
+                </svg>
               </motion.div>
-            ) : (
+            </motion.div>
+
+            {showActions && (
+              <motion.div
+                key="quick-actions"
+                className="mt-6 flex items-center gap-4 flex-wrap justify-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+              >
+                <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className={`${isDark ? 'bg-white/10' : 'bg-pink-100/80'} p-3 rounded-full border ${isDark ? 'border-white/20 hover:bg-white/20' : 'border-pink-200 hover:bg-pink-100'} transition-colors`} aria-label="LinkedIn">
+                  <Linkedin size={18} className={isDark ? 'text-pink-200' : 'text-pink-600'} />
+                </a>
+                <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className={`${isDark ? 'bg-white/10' : 'bg-pink-100/80'} p-3 rounded-full border ${isDark ? 'border-white/20 hover:bg-white/20' : 'border-pink-200 hover:bg-pink-100'} transition-colors`} aria-label="Instagram">
+                  <Instagram size={18} className={isDark ? 'text-pink-200' : 'text-pink-600'} />
+                </a>
+                <a href={`mailto:${EMAIL}`} className={`${isDark ? 'bg-white/10' : 'bg-pink-100/80'} p-3 rounded-full border ${isDark ? 'border-white/20 hover:bg-white/20' : 'border-pink-200 hover:bg-pink-100'} transition-colors`} aria-label="Email">
+                  <Mail size={18} className={isDark ? 'text-pink-200' : 'text-pink-600'} />
+                </a>
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className={`px-4 py-2 rounded-full text-xs font-light border transition-colors ${
+                    isDark
+                      ? 'bg-white/5 border-white/20 text-pink-200 hover:bg-white/10'
+                      : 'bg-white/70 border-pink-200 text-pink-600 hover:bg-white'
+                  }`}
+                >
+                  {EMAIL}
+                </a>
+              </motion.div>
+            )}
+
+            {isCalling && (
               <motion.div
                 key="contact-form"
                 className="w-full max-w-md"
@@ -171,6 +208,36 @@ const Contact = () => {
                     <X size={20} className={isDark ? 'text-white' : 'text-gray-600'} />
                   </motion.button>
                   
+                  {/* Contact quick actions */}
+                  <div className="space-y-4 mb-4 text-xs">
+                    <div className="flex items-center gap-2">
+                      <Mail size={14} className={isDark ? 'text-pink-300' : 'text-pink-500'} />
+                      <a href={`mailto:${EMAIL}`} className={isDark ? 'text-pink-200 hover:underline' : 'text-pink-600 hover:underline'}>{EMAIL}</a>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Phone size={14} className={isDark ? 'text-pink-300' : 'text-pink-500'} />
+                      <a href={`tel:${PHONE_NUMBER.replace(/\s+/g, '')}`} className={isDark ? 'text-pink-200 hover:underline' : 'text-pink-600 hover:underline'}>{PHONE_NUMBER}</a>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin size={14} className={isDark ? 'text-pink-300' : 'text-pink-500'} />
+                      <span className={isDark ? 'text-pink-200' : 'text-pink-600'}>Coimbatore, India</span>
+                    </div>
+                    <div className="flex items-center justify-start gap-3 pt-2">
+                      <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className={`${isDark ? 'bg-white/10' : 'bg-pink-100/80'} p-2 rounded-full border ${isDark ? 'border-white/20 hover:bg-white/20' : 'border-pink-200 hover:bg-pink-100'} transition-colors`} aria-label="LinkedIn">
+                        <Linkedin size={16} className={isDark ? 'text-pink-200' : 'text-pink-600'} />
+                      </a>
+                      <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className={`${isDark ? 'bg-white/10' : 'bg-pink-100/80'} p-2 rounded-full border ${isDark ? 'border-white/20 hover:bg-white/20' : 'border-pink-200 hover:bg-pink-100'} transition-colors`} aria-label="Instagram">
+                        <Instagram size={16} className={isDark ? 'text-pink-200' : 'text-pink-600'} />
+                      </a>
+                      <a href={`mailto:${EMAIL}`} className={`${isDark ? 'bg-white/10' : 'bg-pink-100/80'} p-2 rounded-full border ${isDark ? 'border-white/20 hover:bg-white/20' : 'border-pink-200 hover:bg-pink-100'} transition-colors`} aria-label="Email">
+                        <Mail size={16} className={isDark ? 'text-pink-200' : 'text-pink-600'} />
+                      </a>
+                      <a href={GITHUB_URL} target="_blank" rel="noreferrer" className={`${isDark ? 'bg-white/10' : 'bg-pink-100/80'} p-2 rounded-full border ${isDark ? 'border-white/20 hover:bg-white/20' : 'border-pink-200 hover:bg-pink-100'} transition-colors`} aria-label="GitHub">
+                        <Github size={16} className={isDark ? 'text-pink-200' : 'text-pink-600'} />
+                      </a>
+                    </div>
+                  </div>
+
                   <form className="space-y-4 text-xs">
                     <div className="flex flex-col gap-2 sm:flex-row">
                       <div className="w-1/2">

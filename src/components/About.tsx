@@ -49,7 +49,7 @@ const About = () => {
               <div className="flex justify-center mb-2">
                 <Star className={`${isDark ? 'text-rose-300' : 'text-rose-500'} fill-current`} size={20} />
               </div>
-              <h3 className={`text-2xl font-light mb-1 ${isDark ? 'text-rose-300' : 'text-rose-500'}`}>8.0</h3>
+              <h3 className={`text-2xl font-light mb-1 ${isDark ? 'text-rose-300' : 'text-rose-500'}`}>8.8</h3>
               <p className={`text-xs ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>CGPA</p>
             </div>
             <div className={`${

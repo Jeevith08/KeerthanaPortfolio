@@ -1,7 +1,11 @@
-import { ArrowDown, Github, Linkedin, Mail, ArrowRight, Download, Heart } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, ArrowRight, Download, Heart, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
+  const EMAIL = 'keerthanasubbu5@gmail.com';
+  const LINKEDIN_URL = 'https://www.linkedin.com/in/keerthana-s004?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app';
+  const INSTAGRAM_URL = 'https://www.instagram.com/_k.eerthuu._?igsh=MWZ6NHFkc204bDRvOQ==';
+  const [showGithubMsg, setShowGithubMsg] = useState(false);
   const iconAnimation = {
     initial: { scale: 1 },
     hover: { 
@@ -66,9 +70,10 @@ const Hero = () => {
           </p>
           
           {/* Social links */}
-          <div className="flex space-x-6">
+          <div className="flex items-center space-x-6">
             <motion.a 
-              href="#" 
+              href={LINKEDIN_URL} 
+              target="_blank" rel="noreferrer"
               className="p-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 text-white hover:text-purple-400"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -82,7 +87,8 @@ const Hero = () => {
               </motion.div>
             </motion.a>
             <motion.a 
-              href="#" 
+              href={LINKEDIN_URL} 
+              target="_blank" rel="noreferrer"
               className="p-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 text-white hover:text-purple-400"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -96,7 +102,7 @@ const Hero = () => {
               </motion.div>
             </motion.a>
             <motion.a 
-              href="#" 
+              href={`mailto:${EMAIL}`} 
               className="p-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 text-white hover:text-purple-400"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -109,7 +115,46 @@ const Hero = () => {
                 <Mail size={24} />
               </motion.div>
             </motion.a>
+            <motion.a 
+              href={INSTAGRAM_URL}
+              target="_blank" rel="noreferrer"
+              className="p-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 text-white hover:text-purple-400"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                whileHover="hover"
+                initial="initial"
+                variants={iconAnimation}
+              >
+                <Instagram size={24} />
+              </motion.div>
+            </motion.a>
+            {/* GitHub info message */}
+            {showGithubMsg && (
+              <motion.span
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                className="text-xs px-3 py-1 rounded-full border ml-2 bg-white/10 text-pink-200 border-white/20"
+              >
+                Still not added...!
+              </motion.span>
+            )}
           </div>
+          {/* Override GitHub to show message instead of link */}
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('DOMContentLoaded', function(){
+                const githubBtn = document.querySelector('section .flex.items-center.space-x-6 a');
+                if(githubBtn){
+                  githubBtn.addEventListener('click', function(e){
+                    e.preventDefault();
+                  });
+                }
+              });
+            `
+          }} />
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">

@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail, Download, Play, Heart, Sparkles, ChevronDown, Share2 } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Download, Play, Heart, Sparkles, ChevronDown, Share2, Instagram } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import '@/styles/comforter-font.css';
 
@@ -10,7 +10,11 @@ const EnhancedHero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showSocial, setShowSocial] = useState(false);
   const [showCvMessage, setShowCvMessage] = useState(false);
-  const texts = ['FullStack Developer', 'UI/UX Designer', 'MERN Stack Developer'];
+  const [showGithubMessage, setShowGithubMessage] = useState(false);
+  const EMAIL = 'keerthanasubbu5@gmail.com';
+  const LINKEDIN_URL = 'https://www.linkedin.com/in/keerthana-s004?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app';
+  const INSTAGRAM_URL = 'https://www.instagram.com/_k.eerthuu._?igsh=MWZ6NHFkc204bDRvOQ==';
+  const texts = useMemo(() => ['FullStack Developer', 'UI/UX Designer', 'MERN Stack Developer'], []);
   
   useEffect(() => {
     const text = texts[currentIndex];
@@ -28,7 +32,7 @@ const EnhancedHero = () => {
     }, 100);
 
     return () => clearInterval(typingTimer);
-  }, [currentIndex, texts]);
+  }, [currentIndex]);
 
   return (
     <section id="home" className={`min-h-screen relative overflow-visible lg:overflow-hidden flex items-center justify-center pt-16 pb-6 px-3 sm:pt-8 lg:pt-16 lg:pb-12 lg:px-6 ${
@@ -138,7 +142,7 @@ const EnhancedHero = () => {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-2 sm:gap-4">
             <div className="text-center">
-              <div className={`text-xl font-light ${isDark ? 'text-rose-300' : 'text-rose-500'}`}>8.0</div>
+              <div className={`text-xl font-light ${isDark ? 'text-rose-300' : 'text-rose-500'}`}>8.8</div>
               <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>CGPA</div>
             </div>
             <div className="text-center">
@@ -220,20 +224,64 @@ const EnhancedHero = () => {
             </button>
 
             {showSocial && (
-              <div className="flex space-x-4 mt-3">
-                {[Github, Linkedin, Mail].map((Icon, index) => (
-                  <a
-                    key={index}
-                    href="#"
-                    className={`p-2.5 ${
-                      isDark 
-                        ? 'bg-white/5 hover:bg-white/10 text-rose-300 hover:text-rose-200' 
-                        : 'bg-rose-50 hover:bg-rose-100 text-rose-500 hover:text-rose-600'
-                    } backdrop-blur-sm rounded-full transition-all duration-300`}
+              <div className="flex items-center space-x-4 mt-3">
+                <button
+                  onClick={() => {
+                    setShowGithubMessage(true);
+                    setTimeout(() => setShowGithubMessage(false), 1200);
+                  }}
+                  className={`${isDark 
+                    ? 'bg-white/5 hover:bg-white/10 text-rose-300 hover:text-rose-200' 
+                    : 'bg-rose-50 hover:bg-rose-100 text-rose-500 hover:text-rose-600'
+                  } p-2.5 rounded-full backdrop-blur-sm transition-all duration-300`}
+                  aria-label="GitHub"
+                >
+                  <Github size={18} />
+                </button>
+                <a
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`${isDark 
+                    ? 'bg-white/5 hover:bg-white/10 text-rose-300 hover:text-rose-200' 
+                    : 'bg-rose-50 hover:bg-rose-100 text-rose-500 hover:text-rose-600'
+                  } p-2.5 rounded-full backdrop-blur-sm transition-all duration-300`}
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={18} />
+                </a>
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className={`${isDark 
+                    ? 'bg-white/5 hover:bg-white/10 text-rose-300 hover:text-rose-200' 
+                    : 'bg-rose-50 hover:bg-rose-100 text-rose-500 hover:text-rose-600'
+                  } p-2.5 rounded-full backdrop-blur-sm transition-all duration-300`}
+                  aria-label="Email"
+                >
+                  <Mail size={18} />
+                </a>
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`${isDark 
+                    ? 'bg-white/5 hover:bg-white/10 text-rose-300 hover:text-rose-200' 
+                    : 'bg-rose-50 hover:bg-rose-100 text-rose-500 hover:text-rose-600'
+                  } p-2.5 rounded-full backdrop-blur-sm transition-all duration-300`}
+                  aria-label="Instagram"
+                >
+                  <Instagram size={18} />
+                </a>
+                {showGithubMessage && (
+                  <motion.span
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    className={`text-xs px-3 py-1 rounded-full ${isDark ? 'bg-rose-500/20 text-rose-200 border border-rose-400/30' : 'bg-rose-100 text-rose-600 border border-rose-200'}`}
                   >
-                    <Icon size={18} />
-                  </a>
-                ))}
+                    Still not added...!
+                  </motion.span>
+                )}
               </div>
             )}
           </div>
@@ -299,7 +347,7 @@ const EnhancedHero = () => {
               }}
               transition={{ duration: 2.5, repeat: Infinity }}
             >
-              <Heart size={18} fill="currentColor" className={isDark ? 'text-pink-300' : 'text-pink-500'} />
+              <Instagram size={18} className={isDark ? 'text-pink-300' : 'text-pink-500'} />
             </motion.div>
           </div>
         </motion.div>
